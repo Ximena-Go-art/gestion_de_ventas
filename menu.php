@@ -33,7 +33,19 @@
                           <li><a class="dropdown-item" href="index.php?seccion=familias&accion=listar">Familias Listar</a></li>
                           <li><a class="dropdown-item" href="index.php?seccion=familias&accion=modificar">Familias Modificar</a></li>
 
-                          
+                            <li><a class="dropdown-item"href="index.php?seccion=formas_pago&accion=listar">Formas de Pago Listar</a></li>  
+                            <li><a class="dropdown-item"href="index.php?seccion=formas_pago&accion=modificar">Formas de Pago Modificar</a></li>
+                            
+                            <li><a class="dropdown-item" href="index.php?seccion=tipos_documentos&accion=listar">Tipos de Documentos Listar</a></li>
+                            <li><a class="dropdown-item"href="index.php?seccion=tipos_documentos&accion=modificar">Tipos de Documentos Modificar</a></li>
+
+                            <li><a class="dropdown-item"href="index.php?seccion=roles&accion=listar">Roles Listar</a></li>
+                            <li><a class="dropdown-item"href="index.php?seccion=roles&accion=modificar">Roles Modificar</a></li>
+
+                            <li><a class="dropdown-item"href="index.php?seccion=clientes&accion=listar">Clientes Listar</a></li>
+                            <li><a class="dropdown-item" href="index.php?seccion=clientes&accion=modificar">Clientes Modificar</a></li>
+
+
 
 
                       </ul>

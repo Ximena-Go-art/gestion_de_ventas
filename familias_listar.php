@@ -21,9 +21,8 @@ if (isset($_GET['eliminar']) && is_numeric($_GET['eliminar'])) {
 
     //--*-- ejecutamos la consulta de eliminación
     if (mysqli_query($cnn, $sql_eliminar)) {
-        header("Location: index.php?seccion=familias&accion=listar");
-        exit; 
-        //--*-- evitamos que se ejecute el resto del código después de la redirección
+        echo "<script>window.location='index.php?seccion=familias&accion=listar ';</script>";
+        exit;
     } else {
         //--*-- mostramos un mensaje de error si la eliminación falla
         echo "<div class='alert alert-danger'>Error al eliminar: " . mysqli_error($cnn) . "</div>";
