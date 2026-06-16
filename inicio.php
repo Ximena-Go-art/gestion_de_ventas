@@ -1,139 +1,169 @@
-<div class="container py-4">
-        <h1 class="mb-4">Dashboard</h1>
+<?php
 
-        <div class="row">
-            <!-- Card 1: Ventas -->
-            <div class="col-md-3 mb-4">
-                <div class="card border-primary h-100">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="text-muted mb-2">Ventas Totales</h6>
-                                <h3 class="mb-0">$ 45,231</h3>
-                                <small class="text-success">
-                                    <i class="fas fa-arrow-up"></i> +12.5%
-                                </small>
-                            </div>
-                            <div class="stat-icon text-primary">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+include "conexion.php";
 
-            <!-- Card 2: Clientes -->
-            <div class="col-md-3 mb-4">
-                <div class="card border-success h-100">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="text-muted mb-2">Clientes</h6>
-                                <h3 class="mb-0">1,234</h3>
-                                <small class="text-success">
-                                    <i class="fas fa-arrow-up"></i> +5.2%
-                                </small>
-                            </div>
-                            <div class="stat-icon text-success">
-                                <i class="fas fa-users"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+$cnn = conection();
 
-            <!-- Card 3: Productos -->
-            <div class="col-md-3 mb-4">
-                <div class="card border-warning h-100">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="text-muted mb-2">Productos</h6>
-                                <h3 class="mb-0">567</h3>
-                                <small class="text-danger">
-                                    <i class="fas fa-arrow-down"></i> -3.1%
-                                </small>
-                            </div>
-                            <div class="stat-icon text-warning">
-                                <i class="fas fa-box"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+function contarRegistros($cnn, $tabla, $usarDeleted = true) {
+    $tabla = mysqli_real_escape_string($cnn, $tabla);
 
-            <!-- Card 4: Pedidos -->
-            <div class="col-md-3 mb-4">
-                <div class="card border-info h-100">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="text-muted mb-2">Pedidos Pendientes</h6>
-                                <h3 class="mb-0">42</h3>
-                                <small class="text-warning">
-                                    <i class="fas fa-clock"></i> 8 por atender
-                                </small>
-                            </div>
-                            <div class="stat-icon text-info">
-                                <i class="fas fa-shopping-cart"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    $verificarTabla = mysqli_query($cnn, "SHOW TABLES LIKE '$tabla'");
 
-        <!-- Segunda fila de cards -->
-        <div class="row mt-3">
-            <!-- Card con imagen -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Producto destacado">
-                    <div class="card-body">
-                        <h5 class="card-title">Producto Destacado</h5>
-                        <p class="card-text">Descripción del producto más vendido del mes.</p>
-                        <a href="#" class="btn btn-primary">Ver detalles</a>
-                    </div>
-                </div>
-            </div>
+    if (!$verificarTabla || mysqli_num_rows($verificarTabla) === 0) {
+        return null;
+    }
 
-            <!-- Card con lista -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-header bg-white">
-                        <h5 class="mb-0">Últimas Ventas</h5>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex justify-content-between">
-                                <span>Producto A</span>
-                                <span class="fw-bold">$1,200</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between">
-                                <span>Producto B</span>
-                                <span class="fw-bold">$890</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between">
-                                <span>Producto C</span>
-                                <span class="fw-bold">$2,300</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    $sql = "SELECT COUNT(*) AS total FROM $tabla";
 
-            <!-- Card con progreso -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">Meta Mensual</h5>
-                        <h2 class="text-center">75%</h2>
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-success" style="width: 75%">75%</div>
-                        </div>
-                        <p class="text-muted text-center">Faltan $25,000 para alcanzar la meta</p>
-                    </div>
-                </div>
+    if ($usarDeleted) {
+        $sql .= " WHERE deleted = 0";
+    }
+
+    $resultado = mysqli_query($cnn, $sql);
+
+    if (!$resultado) {
+        return null;
+    }
+
+    $fila = mysqli_fetch_assoc($resultado);
+
+    return isset($fila['total']) ? (int) $fila['total'] : null;
+}
+
+//contadores para el dashboard
+$totalClientes = contarRegistros($cnn, 'clientes');
+$totalProductos = contarRegistros($cnn, 'productos');
+$totalFamilias = contarRegistros($cnn, 'familias');
+$totalUsuarios = contarRegistros($cnn, 'usuarios', false);
+
+?>
+<div class="row">
+
+    <div class="col-md-3 mb-4">
+        <div class="card border-primary h-100">
+            <div class="card-body text-center">
+                <h6>Clientes</h6>
+                <h2><?= $totalClientes !== null ? $totalClientes : 'N/D' ?></h2>
+                <i class="fas fa-users fa-2x text-primary"></i>
             </div>
         </div>
     </div>
+
+    <div class="col-md-3 mb-4">
+        <div class="card border-success h-100">
+            <div class="card-body text-center">
+                <h6>Productos</h6>
+                <h2><?= $totalProductos !== null ? $totalProductos : 'N/D' ?></h2>
+                <i class="fas fa-box fa-2x text-success"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-4">
+        <div class="card border-warning h-100">
+            <div class="card-body text-center">
+                <h6>Familias</h6>
+                <h2><?= $totalFamilias !== null ? $totalFamilias : 'N/D' ?></h2>
+                <i class="fas fa-tags fa-2x text-warning"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-4">
+        <div class="card border-info h-100">
+            <div class="card-body text-center">
+                <h6>Usuarios</h6>
+                <h2><?= $totalUsuarios !== null ? $totalUsuarios : 'N/D' ?></h2>
+                <i class="fas fa-user-shield fa-2x text-info"></i>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h5>Clientes</h5>
+                <p>Administración de clientes.</p>
+
+                <a
+                href="index.php?seccion=clientes&accion=listar"
+                class="btn btn-primary">
+                Ir a Clientes
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h5>Productos</h5>
+                <p>Administración de productos.</p>
+
+                <a
+                href="index.php?seccion=productos&accion=listar"
+                class="btn btn-success">
+                Ir a Productos
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h5>Familias</h5>
+                <p>Administración de familias.</p>
+
+                <a
+                href="index.php?seccion=familias&accion=listar"
+                class="btn btn-warning">
+                Ir a Familias
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="card mt-4">
+
+    <div class="card-header">
+        Módulos Disponibles
+    </div>
+
+    <div class="card-body">
+
+        <ul class="list-group">
+
+            <li class="list-group-item">
+                Gestión de Clientes
+            </li>
+
+            <li class="list-group-item">
+                Gestión de Productos
+            </li>
+
+            <li class="list-group-item">
+                Gestión de Familias
+            </li>
+
+            <li class="list-group-item">
+                Gestión de Roles
+            </li>
+
+            <li class="list-group-item">
+                Gestión de Formas de Pago
+            </li>
+
+            <li class="list-group-item">
+                Gestión de Tipos de Documento
+            </li>
+
+        </ul>
+
+    </div>
+
+</div>

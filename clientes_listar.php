@@ -2,6 +2,17 @@
 include "conexion.php";
 $cnn = conection();
 
+/* CONTADORES */
+
+$totalClientes = mysqli_num_rows(
+    mysqli_query(
+        $cnn,
+        "SELECT id_cliente
+         FROM clientes
+         WHERE deleted = 0"
+    )
+);
+
 /* Eliminación lógica */
 
 if (isset($_GET['eliminar']) && is_numeric($_GET['eliminar'])) {
@@ -13,6 +24,8 @@ if (isset($_GET['eliminar']) && is_numeric($_GET['eliminar'])) {
     SET deleted = 1
     WHERE id_cliente = $id_cliente
     ";
+
+    
 
     if (mysqli_query($cnn, $sql_eliminar)) {
 

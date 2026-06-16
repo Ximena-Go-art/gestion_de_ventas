@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-          <a class="navbar-brand" href="#">Mi Sistema</a>
+          <a class="navbar-brand" href="index.php?seccion=inicio&accion=mostrar">Mi Gestion de Ventas</a>
+
           <button
               class="navbar-toggler"
               type="button"
@@ -14,12 +15,8 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="#">Home</a>
-
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#">Link</a>
-                  </li>
+                      <a class="nav-link active" aria-current="page" href="index.php?seccion=inicio&accion=mostrar">Inicio</a>
+                    </li>
                   <li class="nav-item dropdown">
                       <a
                           class="nav-link dropdown-toggle"
@@ -27,7 +24,7 @@
                           role="button"
                           data-bs-toggle="dropdown"
                           aria-expanded="false">
-                          Archivos
+                          Listados
                       </a>
                       <ul class="dropdown-menu">
                           <li><a class="dropdown-item" href="index.php?seccion=familias&accion=listar">Familias Listar</a></li>
@@ -45,8 +42,11 @@
                             <li><a class="dropdown-item"href="index.php?seccion=clientes&accion=listar">Clientes Listar</a></li>
                             <li><a class="dropdown-item" href="index.php?seccion=clientes&accion=modificar">Clientes Modificar</a></li>
 
+                            <li><a class="dropdown-item"href="index.php?seccion=proveedores&accion=listar">Proveedores Listar</a></li>
+                            <li><a class="dropdown-item"href="index.php?seccion=proveedores&accion=modificar">Proveedores Modificar</a></li>
 
-
+                            <li><a class="dropdown-item"href="index.php?seccion=compras&accion=listar">Compras Listar</a></li>
+                            <li><a class="dropdown-item"href="index.php?seccion=compras&accion=modificar">Compras Modificar</a></li>
 
                       </ul>
                   </li>
@@ -66,4 +66,5 @@
               </form>
           </div>
       </div>
+      
   </nav>
