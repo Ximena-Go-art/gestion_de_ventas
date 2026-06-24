@@ -48,6 +48,9 @@
                             <li><a class="dropdown-item"href="index.php?seccion=compras&accion=listar">Compras Listar</a></li>
                             <li><a class="dropdown-item"href="index.php?seccion=compras&accion=modificar">Compras Modificar</a></li>
 
+                             <li><a class="dropdown-item"href="index.php?seccion=usuarios&accion=listar">Usuarios Listar</a></li>
+                            <li><a class="dropdown-item"href="index.php?seccion=usuarios&accion=modificar">Usuarios Modificar</a></li>
+
                       </ul>
                   </li>
                   <li class="nav-item">
@@ -66,5 +69,4 @@
               </form>
           </div>
       </div>
-      
   </nav>

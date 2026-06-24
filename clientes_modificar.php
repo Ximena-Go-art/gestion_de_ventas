@@ -10,6 +10,7 @@ $datos = [
     'documento' => ''
 ];
 
+
 /* Guardar */
 
 if (isset($_POST['btnGuardar'])) {
@@ -25,6 +26,7 @@ if (isset($_POST['btnGuardar'])) {
         $cnn,
         trim($_POST['documento'])
     );
+
 
     /* Nuevo */
 
@@ -42,6 +44,7 @@ if (isset($_POST['btnGuardar'])) {
             '$documento'
         )";
 
+
     } else {
 
         /* Modificar */
@@ -52,22 +55,57 @@ if (isset($_POST['btnGuardar'])) {
             cliente = '$cliente',
             documento = '$documento'
         WHERE id_cliente = $id_cliente";
+
     }
 
+
     $resultado = mysqli_query($cnn, $sql);
+
 
     if ($resultado) {
 
         echo "
         <script>
-         window.location='index.php?seccion=clientes&accion=listar';
-     </script>";
+
+        Swal.fire({
+            title: '¡Guardado correctamente!',
+            text: 'El cliente fue registrado con éxito.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+        }).then((result)=>{
+
+            if(result.isConfirmed){
+
+                window.location='index.php?seccion=clientes&accion=listar';
+
+            }
+
+        });
+
+        </script>";
+
 
     } else {
 
-        echo "Error al guardar: " . mysqli_error($cnn);
+
+        echo "
+        <script>
+
+        Swal.fire({
+            title: 'Error',
+            text: 'No se pudo guardar el cliente.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        });
+
+        </script>";
+
+
     }
+
 }
+
+
 
 /* Cargar datos */
 
@@ -81,21 +119,33 @@ if (isset($_GET['id'])) {
     WHERE id_cliente = $id_cliente
     ";
 
+
     $resultado = mysqli_query($cnn, $sql);
+
 
     if ($resultado && mysqli_num_rows($resultado) > 0) {
 
         $datos = mysqli_fetch_assoc($resultado);
 
+
     } else {
 
-        echo "
-        <div class='alert alert-danger'>
-            No se encontró el cliente.
-        </div>";
-    }
-}
 
+        echo "
+        <script>
+
+        Swal.fire({
+            title: 'Cliente no encontrado',
+            text: 'No existe un cliente con ese ID.',
+            icon: 'warning',
+            confirmButtonText: 'Aceptar'
+        });
+
+        </script>";
+
+    }
+
+}
 ?>
 
 <div class="container pt-4">
@@ -165,7 +215,7 @@ if (isset($_GET['id'])) {
                     type="submit"
                     name="btnGuardar"
                     class="btn btn-primary">
-                    Guardar
+                    Guardar 
                 </button>
 
             </form>

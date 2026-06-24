@@ -100,9 +100,9 @@ $resultado = mysqli_query($cnn, $sql);
                     </a>
 
                     <a
-                        href="index.php?seccion=clientes&accion=listar&eliminar=<?= $fila['id_cliente'] ?>"
-                        class="btn btn-danger btn-sm"
-                        onclick="return confirm('¿Desea eliminar este cliente?')">
+                        href="index.php?seccion=clientes&accion=eliminar&id=<?= $fila['id_cliente'] ?>"
+                        class="btn btn-danger"
+                        onclick="confirmarEliminar(event)">
                         Eliminar
                     </a>
 

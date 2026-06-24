@@ -126,44 +126,6 @@ $totalUsuarios = contarRegistros($cnn, 'usuarios', false);
             </div>
         </div>
     </div>
-
-</div>
-<div class="card mt-4">
-
-    <div class="card-header">
-        Módulos Disponibles
-    </div>
-
-    <div class="card-body">
-
-        <ul class="list-group">
-
-            <li class="list-group-item">
-                Gestión de Clientes
-            </li>
-
-            <li class="list-group-item">
-                Gestión de Productos
-            </li>
-
-            <li class="list-group-item">
-                Gestión de Familias
-            </li>
-
-            <li class="list-group-item">
-                Gestión de Roles
-            </li>
-
-            <li class="list-group-item">
-                Gestión de Formas de Pago
-            </li>
-
-            <li class="list-group-item">
-                Gestión de Tipos de Documento
-            </li>
-
-        </ul>
-
-    </div>
+    
 
 </div>
