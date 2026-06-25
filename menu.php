@@ -51,6 +51,12 @@
                              <li><a class="dropdown-item"href="index.php?seccion=usuarios&accion=listar">Usuarios Listar</a></li>
                             <li><a class="dropdown-item"href="index.php?seccion=usuarios&accion=modificar">Usuarios Modificar</a></li>
 
+                            <li><a class="dropdown-item"href="index.php?seccion=productos&accion=listar">Productos Listar</a></li>
+                            <li><a class="dropdown-item"href="index.php?seccion=productos&accion=modificar">Productos Modificar</a></li>
+
+                            <li><a class="dropdown-item"href="index.php?seccion=registrar&accion=listar">Registros Listar</a></li>
+                            <li><a class="dropdown-item"href="index.php?seccion=registros&accion=modificar">Registros Modificar</a></li>
+
                       </ul>
                   </li>
                   <li class="nav-item">

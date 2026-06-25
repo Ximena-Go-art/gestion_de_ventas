@@ -24,9 +24,7 @@ if (isset($_GET['eliminar']) && is_numeric($_GET['eliminar'])) {
     SET deleted = 1
     WHERE id_cliente = $id_cliente
     ";
-
     
-
     if (mysqli_query($cnn, $sql_eliminar)) {
 
         echo "
@@ -102,9 +100,11 @@ $resultado = mysqli_query($cnn, $sql);
                     <a
                         href="index.php?seccion=clientes&accion=listar&eliminar=<?= $fila['id_cliente'] ?>"
                         class="btn btn-danger btn-sm"
-                        onclick="return confirm('¿Desea eliminar este cliente?')">
+                        onclick="return confirm('¿Está seguro de eliminar este cliente?');">
                         Eliminar
+                        
                     </a>
+                    
 
                 </td>
 
