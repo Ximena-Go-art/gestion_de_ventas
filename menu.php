@@ -26,10 +26,12 @@
                           aria-expanded="false">
                           Listados
                       </a>
+   
                       <ul class="dropdown-menu">
                           <li><a class="dropdown-item" href="index.php?seccion=familias&accion=listar">Familias Listar</a></li>
                           <li><a class="dropdown-item" href="index.php?seccion=familias&accion=modificar">Familias Modificar</a></li>
 
+                        
                             <li><a class="dropdown-item"href="index.php?seccion=formas_pago&accion=listar">Formas de Pago Listar</a></li>  
                             <li><a class="dropdown-item"href="index.php?seccion=formas_pago&accion=modificar">Formas de Pago Modificar</a></li>
                             
@@ -54,8 +56,14 @@
                             <li><a class="dropdown-item"href="index.php?seccion=productos&accion=listar">Productos Listar</a></li>
                             <li><a class="dropdown-item"href="index.php?seccion=productos&accion=modificar">Productos Modificar</a></li>
 
-                            <li><a class="dropdown-item"href="index.php?seccion=registrar&accion=listar">Registros Listar</a></li>
-                            <li><a class="dropdown-item"href="index.php?seccion=registros&accion=modificar">Registros Modificar</a></li>
+                            <li><a class="dropdown-item"href="index.php?seccion=compra_detalles&accion=listar">Compras Detalles Listar</a></li>
+                            <li><a class="dropdown-item"href="index.php?seccion=compra_detalles&accion=modificar">Compras Detalles Modificar</a></li>
+
+                            <li><a class="dropdown-item"href="index.php?seccion=ventas_detalles&accion=listar">Ventas Detalles Listar</a></li>
+                            <li><a class="dropdown-item"href="index.php?seccion=ventas_detalles&accion=modificar">Ventas Detalles Modificar</a></li>
+
+
+                            
 
                       </ul>
                   </li>
