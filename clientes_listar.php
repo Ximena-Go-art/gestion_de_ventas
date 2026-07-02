@@ -2,118 +2,70 @@
 include "conexion.php";
 $cnn = conection();
 
-/* CONTADORES */
-
-$totalClientes = mysqli_num_rows(
-    mysqli_query(
-        $cnn,
-        "SELECT id_cliente
-         FROM clientes
-         WHERE deleted = 0"
-    )
-);
-
 /* Eliminación lógica */
-
 if (isset($_GET['eliminar']) && is_numeric($_GET['eliminar'])) {
-
     $id_cliente = intval($_GET['eliminar']);
-
-    $sql_eliminar = "
-    UPDATE clientes
-    SET deleted = 1
-    WHERE id_cliente = $id_cliente
-    ";
+    $sql_eliminar = "UPDATE clientes SET deleted = 1 WHERE id_cliente = $id_cliente";
     
     if (mysqli_query($cnn, $sql_eliminar)) {
-
-        echo "
-            <script>
-                window.location='index.php?seccion=clientes&accion=listar';
-         </script>";
+        echo "<script>window.location='index.php?seccion=clientes&accion=listar';</script>";
     } else {
-
-        echo "<div class='alert alert-danger'>
-                Error al eliminar: " . mysqli_error($cnn) . "
-              </div>";
+        echo "<div class='alert alert-danger m-3'>Error al eliminar: " . mysqli_error($cnn) . "</div>";
     }
 }
 
 /* Consulta */
-
-$sql = "
-SELECT
-    id_cliente,
-    cliente,
-    documento
-FROM clientes
-WHERE deleted = 0
-";
-
+$sql = "SELECT id_cliente, cliente, documento FROM clientes WHERE deleted = 0";
 $resultado = mysqli_query($cnn, $sql);
-
 ?>
 
-<div class="container mt-4">
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold m-0">Clientes</h2>
+            <p class="text-muted small">Gestión y listado de clientes registrados</p>
+        </div>
+        <a href="index.php?seccion=clientes&accion=modificar" class="btn btn-danger rounded-pill px-4">
+            + Nuevo Cliente
+        </a>
+    </div>
 
-    <h2>Clientes</h2>
-
-    <a
-        href="index.php?seccion=clientes&accion=modificar"
-        class="btn btn-success mb-3">
-        Nuevo Cliente
-    </a>
-
-    <table class="table table-striped">
-
-        <thead>
-
-            <tr>
-                <th>ID</th>
-                <th>Cliente</th>
-                <th>Documento</th>
-                <th>Acciones</th>
-            </tr>
-
-        </thead>
-
-        <tbody>
-
-            <?php while($fila = mysqli_fetch_assoc($resultado)){ ?>
-
-            <tr>
-
-                <td><?= $fila['id_cliente'] ?></td>
-
-                <td><?= htmlspecialchars($fila['cliente']) ?></td>
-
-                <td><?= htmlspecialchars($fila['documento']) ?></td>
-
-                <td>
-
-                    <a
-                        href="index.php?seccion=clientes&accion=modificar&id=<?= $fila['id_cliente'] ?>"
-                        class="btn btn-warning btn-sm">
-                        Modificar
-                    </a>
-
-                    <a
-                        href="index.php?seccion=clientes&accion=listar&eliminar=<?= $fila['id_cliente'] ?>"
-                        class="btn btn-danger btn-sm"
-                        onclick="return confirm('¿Está seguro de eliminar este cliente?');">
-                        Eliminar
-                        
-                    </a>
-                    
-
-                </td>
-
-            </tr>
-
-            <?php } ?>
-
-        </tbody>
-
-    </table>
-
+    <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4">ID</th>
+                            <th>Nombre del Cliente</th>
+                            <th>Documento</th>
+                            <th class="text-end pe-4">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while($fila = mysqli_fetch_assoc($resultado)){ ?>
+                        <tr>
+                            <td class="ps-4 fw-bold text-muted"><?= $fila['id_cliente'] ?></td>
+                            <td>
+                                <div class="fw-bold"><?= htmlspecialchars($fila['cliente']) ?></div>
+                            </td>
+                            <td><?= htmlspecialchars($fila['documento']) ?></td>
+                            <td class="text-end pe-4">
+                                <a href="index.php?seccion=clientes&accion=modificar&id=<?= $fila['id_cliente'] ?>" 
+                                   class="btn btn-outline-warning btn-sm rounded-pill px-3 me-1">
+                                   Editar
+                                </a>
+                                <a href="index.php?seccion=clientes&accion=listar&eliminar=<?= $fila['id_cliente'] ?>" 
+                                   class="btn btn-outline-danger btn-sm rounded-pill px-3"
+                                   onclick="return confirm('¿Está seguro de eliminar este cliente?');">
+                                   Eliminar
+                                </a>
+                            </td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

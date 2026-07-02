@@ -28,6 +28,8 @@
                       </a>
    
                       <ul class="dropdown-menu">
+
+
                           <li><a class="dropdown-item" href="index.php?seccion=familias&accion=listar">Familias Listar</a></li>
                           <li><a class="dropdown-item" href="index.php?seccion=familias&accion=modificar">Familias Modificar</a></li>
 
@@ -61,6 +63,8 @@
 
                             <li><a class="dropdown-item"href="index.php?seccion=ventas_detalles&accion=listar">Ventas Detalles Listar</a></li>
                             <li><a class="dropdown-item"href="index.php?seccion=ventas_detalles&accion=modificar">Ventas Detalles Modificar</a></li>
+
+                            <li><a class="dropdown-item"href="index.php?seccion=cajas&accion=listar">Cajas Listar</a></li>
 
 
                             

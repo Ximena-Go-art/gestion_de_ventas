@@ -10,7 +10,7 @@ $sql = "
 SELECT
     id_formas_pago,
     descripcion
-FROM formas_pago
+FROM formas_pagos
 WHERE deleted = 0
 ";
 
